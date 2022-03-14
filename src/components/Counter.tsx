@@ -4,20 +4,6 @@ import { IncrementExpression } from "typescript";
 import store from "../store/index";
 const classes = require("./Counter.module.css");
 
-// const Counter = () => {
-//   const dispatch = useDispatch();
-//   const value = useSelector((state:{counter:Number})=>state.counter);
-//   const incrementHandler =()=>{dispatch({type:"increment"})};
-//   const decrementHandler =()=>{dispatch({type:"decrement"})};
-//   return (
-//     <main className={classes.counter}>
-//       <h1>Redux Counter</h1>
-//       <div className={classes.value}>-- {value} --</div>
-//       <button onClick={incrementHandler}>+</button>
-//       <button className="mx-3" onClick={decrementHandler}>-</button>
-//     </main>
-//   );
-// };
 interface CounterProps {
   value: Number;
   increment: () => void;
