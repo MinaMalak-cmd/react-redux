@@ -1,16 +1,32 @@
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import store from "../store/index";
-const classes= require("./Counter.module.css");
+import "./Counter.css";
 
+interface IState {
+  counter: Number;
+  show: boolean;
+}
 const Counter = () => {
   const dispatch = useDispatch();
-  const value = useSelector((state:{counter:Number})=>state.counter);
+  const value = useSelector((state: IState) => state.counter);
+  const show = useSelector((state: IState) => state.show);
   return (
-    <main className={classes.counter}>
+    <main className={`counter`}>
       <h1>Redux Counter</h1>
-      <div className={classes.value}>-- {value} --</div>
-      <button onClick={()=>dispatch({type:"increment"})}>+</button>
-      <button className="mx-3" onClick={()=>dispatch({type:"decrement"})}>-</button>
+      <div className={`value`}>-- {show&&value} --</div>
+      <button onClick={() => dispatch({ type: "increment" })}>Increment</button>
+      <button
+        onClick={() => dispatch({ type: "incrementByValue", payload: 6 })}
+      >
+        Increment by 6
+      </button>
+      <button className="" onClick={() => dispatch({ type: "decrement" })}>
+        Decrement
+      </button>
+      <br />
+      <button className="btn1" onClick={() => dispatch({ type: "toggle" })}>
+        Toggle
+      </button>
     </main>
   );
 };
