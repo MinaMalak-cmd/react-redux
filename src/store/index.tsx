@@ -1,35 +1,28 @@
-import { shallowEqual } from "react-redux";
-import { createStore } from "redux";
+import { createSlice, configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   counter: 0,
-  show:true
-}
-const counterReducer = (state = initialState, action:{type:string,payload?:number}) => {
-  switch (action.type) {
-      case "increment":
-        return {
-          ...state,
-          counter: state.counter + 1,
-        };
-      case "decrement":
-        return {
-          ...state,
-          counter: state.counter - 1,
-        };
-        case "incrementByValue":
-        return {
-          ...state,
-          counter: state.counter + (action.payload ||1),
-        };
-        case "toggle":
-          return {
-            ...state,
-            show: !state.show,
-          };
-      default:
-        return state;
-    }
-  };
-  const store = createStore(counterReducer); //takes a reducer function
-  export default store;
+  show: true,
+};
+const counterSlice = createSlice({
+  name: "Counter",
+  initialState,
+  reducers: {
+    increment(state) {
+      state.counter++;
+    },
+    decrement(state) {
+      state.counter--;
+    },
+    incrementByValue(state, action) {
+      state.counter += action.payload;
+    },
+    toggle(state) {
+      state.show = !state.show;
+    },
+  },
+});
+
+const store = configureStore({ reducer: { counter: counterSlice.reducer } });
+export const Actions = counterSlice.actions;
+export  default store;
